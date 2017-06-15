@@ -4,6 +4,7 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from './store';
+
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 import 'assets/custom-theme/index.css'; // 换肤版本element-ui css https://github.com/PanJiaChen/custom-element-theme
@@ -21,16 +22,25 @@ import vueWaves from './directive/waves';// 水波纹指令
 import errLog from 'store/errLog';// error log组件
 import './mock/index.js';  // 该项目所有请求使用mockjs模拟
 
+import VueI18n from 'vue-i18n';
+import enLocale from 'element-ui/lib/locale/lang/en'
+// import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+
 // register globally
 Vue.component('multiselect', Multiselect);
 Vue.component('Sticky', Sticky);
+Vue.use(VueI18n);
 Vue.use(ElementUI);
+
 Vue.use(vueWaves);
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 });
+
+Vue.config.lang = 'en'
+Vue.locale('en', enLocale)
 
 // permissiom judge
 function hasPermission(roles, permissionRoles) {
